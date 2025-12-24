@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | FLY TAU</title>
+    <link rel="stylesheet" href="../static/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <header class="main-header" style="background: #2c3e50;"> <div class="container nav-container">
+            <a href="home_page.html" class="logo">
+                <i class="fa-solid fa-lock header-icon"></i> FLY TAU <span style="font-size:0.5em; margin-left:5px;">ADMIN</span>
+            </a>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="home_page.html">Back to Site</a></li>
+                    <li><a href="#" class="active">Dashboard</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container results-section">
+        <h2 class="section-title">Business Overview</h2>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">150</div>
+                <p>Total Bookings</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">$45k</div>
+                <p>Total Revenue</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">12</div>
+                <p>Active Flights</p>
+            </div>
+        </div>
+
+        <section class="search-widget-card" style="margin-bottom: 3rem;">
+            <h3 class="widget-title"><i class="fa-solid fa-plus-circle"></i> Add New Flight</h3>
+            <form action="#" method="POST" class="flight-search-form">
+                <div class="input-group">
+                    <label>Airline</label>
+                    <input type="text" name="airline" placeholder="El Al" required>
+                </div>
+                <div class="input-group">
+                    <label>Origin</label>
+                    <input type="text" name="origin" placeholder="TLV" required>
+                </div>
+                <div class="input-group">
+                    <label>Destination</label>
+                    <input type="text" name="destination" placeholder="NYC" required>
+                </div>
+                <div class="input-group">
+                    <label>Price ($)</label>
+                    <input type="number" name="price" placeholder="400" required>
+                </div>
+                <div class="button-group">
+                    <button type="submit" class="btn btn-primary">Add Flight</button>
+                </div>
+            </form>
+        </section>
+
+        <h3 class="widget-title">Manage Active Flights</h3>
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Origin</th>
+                    <th>Destination</th>
+                    <th>Date</th>
+                    <th>Price</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>101</td>
+                    <td>Tel Aviv (TLV)</td>
+                    <td>London (LHR)</td>
+                    <td>2025-08-15</td>
+                    <td>$420</td>
+                    <td><button class="btn-danger"><i class="fa-solid fa-trash"></i> Delete</button></td>
+                </tr>
+                <tr>
+                    <td>102</td>
+                    <td>New York (JFK)</td>
+                    <td>Paris (CDG)</td>
+                    <td>2025-09-01</td>
+                    <td>$550</td>
+                    <td><button class="btn-danger"><i class="fa-solid fa-trash"></i> Delete</button></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </main>
+
+    <footer class="main-footer">
+        <p class="copyright">&copy; 2025 FLY TAU Admin System.</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Bookings | FLY TAU</title>
+    <link rel="stylesheet" href="../static/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container nav-container">
+            <a href="home_page.html" class="logo">
+                <i class="fa-solid fa-plane-up header-icon"></i> FLY TAU
+            </a>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="home_page.html">Book a Flight</a></li>
+                    <li><a href="my_bookings.html" class="active">My Bookings</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <a href="login.html" class="btn btn-outline">Log Out</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container results-section">
+        <h2 class="section-title">My Travel History</h2>
+
+        <div class="flight-card">
+            <div class="flight-info">
+                <div class="route-info">
+                    <span class="status-badge status-confirmed">Confirmed</span>
+                    <div style="margin-top: 10px; font-weight: bold;">Order #12345</div>
+                </div>
+
+                <div class="airline-logo">
+                    <i class="fa-solid fa-plane"></i> EL AL
+                    <div class="city">15/08/2025</div>
+                </div>
+
+                <div class="route-info">
+                    <div class="time">08:00</div>
+                    <div class="city">TLV</div>
+                </div>
+                <div class="route-info">
+                    <i class="fa-solid fa-arrow-right" style="color:var(--sky-blue)"></i>
+                </div>
+                <div class="route-info">
+                    <div class="time">13:00</div>
+                    <div class="city">JFK</div>
+                </div>
+            </div>
+
+            <div class="flight-price">
+                <button class="btn btn-danger" style="padding: 10px 20px; font-size: 1rem;">
+                    Cancel Booking
+                </button>
+            </div>
+        </div>
+
+        <div class="flight-card" style="opacity: 0.7;">
+            <div class="flight-info">
+                <div class="route-info">
+                    <span class="status-badge status-cancelled">Cancelled</span>
+                    <div style="margin-top: 10px; font-weight: bold;">Order #98765</div>
+                </div>
+
+                <div class="airline-logo">
+                    <i class="fa-brands fa-fly"></i> BA
+                    <div class="city">01/01/2024</div>
+                </div>
+
+                <div class="route-info">
+                    <div class="time">10:00</div>
+                    <div class="city">LHR</div>
+                </div>
+                <div class="route-info">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
+                <div class="route-info">
+                    <div class="time">16:00</div>
+                    <div class="city">TLV</div>
+                </div>
+            </div>
+
+            <div class="flight-price">
+                <span style="font-size: 0.9rem; color: #666;">Refunded</span>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="main-footer">
+        <p class="copyright">&copy; 2025 FLY TAU Airlines.</p>
+    </footer>
+
+</body>
+</html>

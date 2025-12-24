@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLY TAU | Your Gateway to the World</title>
+    <link rel="stylesheet" href="../static/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container nav-container">
+            <a href="HOME_PAGE.HTML" class="logo">
+                <i class="fa-solid fa-plane-up header-icon"></i>
+                <span class="brand-name">FLY TAU</span>
+            </a>
+
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="HOME_PAGE.HTML" class="active">Book a Flight</a></li>
+                    <li><a href="my_bookings.html">My Bookings</a></li>
+                    <li><a href="admin_dashboard.html" class="admin-link"><i class="fa-solid fa-lock"></i> Admin</a></li>
+                </ul>
+            </nav>
+
+            <div class="auth-buttons">
+                <a href="login.html" class="btn btn-outline">Log In <i class="fa-regular fa-user"></i></a>
+                <a href="register.html" class="btn btn-primary">Register Now</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="hero-section">
+        <div class="hero-overlay"></div>
+
+        <div class="hero-content container">
+            <h1 class="hero-title"> Discover Your Next Adventure <i class="fa-solid fa-umbrella-beach vacation-icon"></i></h1>
+            <p class="hero-subtitle">Sky-high standards, ocean-deep comfort. Fly with TAU.</p>
+
+            <section class="search-widget-card">
+                <h2 class="widget-title"><i class="fa-solid fa-jet-fighter-up"></i> Where are you flying?</h2>
+
+                <form action="search_results.html" method="GET" class="flight-search-form">
+
+                    <div class="input-group">
+                        <label for="origin"><i class="fa-solid fa-plane-departure"></i> From</label>
+                        <input type="text" id="origin" name="origin" placeholder="Origin City or Airport" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="destination"><i class="fa-solid fa-plane-arrival"></i> To</label>
+                        <input type="text" id="destination" name="destination" placeholder="Destination City" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="departure_date"><i class="fa-regular fa-calendar-days"></i> Departure Date</label>
+                        <input type="date" id="departure_date" name="departure_date" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="passengers"><i class="fa-solid fa-users"></i> Travelers</label>
+                        <select id="passengers" name="passengers">
+                            <option value="1">1 Adult</option>
+                            <option value="2">2 Travelers</option>
+                            <option value="3">3 Travelers</option>
+                            <option value="4+">4+ Travelers</option>
+                        </select>
+                    </div>
+
+                    <div class="button-group">
+                        <button type="submit" class="btn btn-search btn-block">
+                            Search Flights <i class="fa-solid fa-magnifying-glass-arrow-right"></i>
+                        </button>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container footer-content">
+            <div class="footer-logo">
+                <i class="fa-solid fa-plane header-icon"></i> FLY TAU
+            </div>
+            <p class="copyright">
+                &copy; 2025 FLY TAU Airlines. All rights reserved for the Academic Database Project.
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>
