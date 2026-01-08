@@ -1,94 +1,207 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FLY TAU | Your Gateway to the World</title>
-    <link rel="stylesheet" href="../static/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body>
+{% extends "layout.html" %}
 
-    <header class="main-header">
-        <div class="container nav-container">
-            <a href="HOME_PAGE.HTML" class="logo">
-                <i class="fa-solid fa-plane-up header-icon"></i>
-                <span class="brand-name">FLY TAU</span>
-            </a>
+{% block content %}
+<datalist id="airports">
+    {% for airport in airports %}
+    <option value="{{ airport.city }} ({{ airport.airport_code }})">
+        {% endfor %}
+</datalist>
 
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="HOME_PAGE.HTML" class="active">Book a Flight</a></li>
-                    <li><a href="my_bookings.html">My Bookings</a></li>
-                    <li><a href="admin_dashboard.html" class="admin-link"><i class="fa-solid fa-lock"></i> Admin</a></li>
-                </ul>
-            </nav>
+<div class="hero-section">
+    <div class="hero-content">
+        <h1 class="main-title">Discover Your Next Adventure</h1>
+        <p class="subtitle">Explore the world with Fly Tau</p>
 
-            <div class="auth-buttons">
-                <a href="login.html" class="btn btn-outline">Log In <i class="fa-regular fa-user"></i></a>
-                <a href="register.html" class="btn btn-primary">Register Now</a>
-            </div>
+        <div class="search-bar-container">
+            <form action="/search-results" method="POST" class="horizontal-search-form">
+
+                <div class="search-item">
+                    <label><i class="fas fa-plane-departure"></i> From</label>
+                    <input list="airports" name="origin" placeholder="Where from?" required>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="search-item">
+                    <label><i class="fas fa-plane-arrival"></i> To</label>
+                    <input list="airports" name="destination" placeholder="Where to?" required>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="search-item">
+                    <label><i class="far fa-calendar-alt"></i> Date</label>
+                    <input type="date" name="departure_date" min="{{ today }}" value="{{ today }}" required>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="search-item small-item">
+                    <label><i class="fas fa-user-friends"></i> Travelers</label>
+                    <input type="number" name="passengers" min="1" max="10" value="1" required>
+                </div>
+
+                <button type="submit" class="search-btn">
+                    Search
+                </button>
+            </form>
         </div>
-    </header>
+    </div>
+</div>
 
-    <main class="hero-section">
-        <div class="hero-overlay"></div>
+<style>
+    /* רקע כללי לדף הבית עם תמונה יפה */
+    .hero-section {
+        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+        background-size: cover;
+        background-position: center;
+        height: 90vh;
+        /* תופס את רוב המסך */
+        display: flex;
+        align-items: center;
+        /* ממרכז אנכית */
+        justify-content: center;
+        /* ממרכז אופקית */
+        text-align: center;
+        color: white;
+    }
 
-        <div class="hero-content container">
-            <h1 class="hero-title"> Discover Your Next Adventure <i class="fa-solid fa-umbrella-beach vacation-icon"></i></h1>
-            <p class="hero-subtitle">Sky-high standards, ocean-deep comfort. Fly with TAU.</p>
+    .main-title {
+        font-size: 3.5rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+    }
 
-            <section class="search-widget-card">
-                <h2 class="widget-title"><i class="fa-solid fa-jet-fighter-up"></i> Where are you flying?</h2>
+    .subtitle {
+        font-size: 1.2rem;
+        margin-bottom: 40px;
+        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+    }
 
-                <form action="search_results.html" method="GET" class="flight-search-form">
+    /* --- עיצוב בר החיפוש לרוחב --- */
+    .search-bar-container {
+        background: white;
+        padding: 10px;
+        border-radius: 100px;
+        /* פינות עגולות מאוד (צורת גלולה) */
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        /* צל עמוק ויפה */
+        display: inline-block;
+        /* כדי שהרוחב יתאים לתוכן */
+        max-width: 1000px;
+        width: 90%;
+    }
 
-                    <div class="input-group">
-                        <label for="origin"><i class="fa-solid fa-plane-departure"></i> From</label>
-                        <input type="text" id="origin" name="origin" placeholder="Origin City or Airport" required>
-                    </div>
+    .horizontal-search-form {
+        display: flex;
+        /* זה הסוד - מסדר הכל בשורה אחת */
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+    }
 
-                    <div class="input-group">
-                        <label for="destination"><i class="fa-solid fa-plane-arrival"></i> To</label>
-                        <input type="text" id="destination" name="destination" placeholder="Destination City" required>
-                    </div>
+    .search-item {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 5px 20px;
+        flex: 1;
+        /* כל שדה תופס מקום שווה */
+        position: relative;
+    }
 
-                    <div class="input-group">
-                        <label for="departure_date"><i class="fa-regular fa-calendar-days"></i> Departure Date</label>
-                        <input type="date" id="departure_date" name="departure_date" required>
-                    </div>
+    .search-item label {
+        font-size: 0.8rem;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 5px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
 
-                    <div class="input-group">
-                        <label for="passengers"><i class="fa-solid fa-users"></i> Travelers</label>
-                        <select id="passengers" name="passengers">
-                            <option value="1">1 Adult</option>
-                            <option value="2">2 Travelers</option>
-                            <option value="3">3 Travelers</option>
-                            <option value="4+">4+ Travelers</option>
-                        </select>
-                    </div>
+    .search-item input {
+        border: none;
+        outline: none;
+        width: 100%;
+        font-size: 1rem;
+        color: #555;
+        background: transparent;
+        font-family: inherit;
+    }
 
-                    <div class="button-group">
-                        <button type="submit" class="btn btn-search btn-block">
-                            Search Flights <i class="fa-solid fa-magnifying-glass-arrow-right"></i>
-                        </button>
-                    </div>
-                </form>
-            </section>
-        </div>
-    </main>
+    /* עיצוב מיוחד לשדה תאריך כדי שייראה טוב */
+    input[type="date"] {
+        color: #555;
+    }
 
-    <footer class="main-footer">
-        <div class="container footer-content">
-            <div class="footer-logo">
-                <i class="fa-solid fa-plane header-icon"></i> FLY TAU
-            </div>
-            <p class="copyright">
-                &copy; 2025 FLY TAU Airlines. All rights reserved for the Academic Database Project.
-            </p>
-        </div>
-    </footer>
+    .small-item {
+        flex: 0.5;
+        /* שדה הנוסעים קטן יותר */
+        min-width: 80px;
+    }
 
-</body>
-</html>
+    /* הקו המפריד בין השדות */
+    .divider {
+        width: 1px;
+        height: 40px;
+        background-color: #ddd;
+    }
+
+    /* כפתור החיפוש */
+    .search-btn {
+        background: #007bff;
+        /* כחול יפה */
+        color: white;
+        border: none;
+        padding: 15px 35px;
+        border-radius: 50px;
+        /* כפתור עגול */
+        font-size: 1.1rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-left: 10px;
+    }
+
+    .search-btn:hover {
+        background: #0056b3;
+        /* כחול כהה יותר בהובר */
+        transform: translateY(-2px);
+        /* קפיצה קטנה למעלה */
+        box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+    }
+
+    /* התאמה למובייל - אם המסך קטן מדי, זה יחזור להיות אחד מתחת לשני */
+    @media (max-width: 768px) {
+        .search-bar-container {
+            border-radius: 20px;
+            padding: 20px;
+        }
+
+        .horizontal-search-form {
+            flex-direction: column;
+            /* הופך לטור */
+            gap: 15px;
+        }
+
+        .divider {
+            display: none;
+            /* מסתיר את הקווים במובייל */
+        }
+
+        .search-item {
+            width: 100%;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .search-btn {
+            width: 100%;
+            margin-left: 0;
+            margin-top: 10px;
+        }
+    }
+</style>
+{% endblock %}

@@ -1,93 +1,71 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Results | FLY TAU</title>
-    <link rel="stylesheet" href="../static/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body>
+{% extends "layout.html" %}
 
-    <header class="main-header">
-        <div class="container nav-container">
-            <a href="home_page.html" class="logo">
-                <i class="fa-solid fa-plane-up header-icon"></i> FLY TAU
-            </a>
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="home_page.html">New Search</a></li>
-                    <li><a href="my_bookings.html">My Bookings</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+{% block content %}
+<div class="results-container">
 
-    <main class="container results-section">
-        <h2 class="section-title">Flights from <strong>Tel Aviv</strong> to <strong>London</strong></h2>
+    <div style="margin-bottom: 30px; text-align: center;">
+        <h2 style="color: #0056b3;">Flights from {{ origin }} to {{ dest }}</h2>
+        <p style="color: #666;">Date: {{ date }} | Passengers: {{ passengers }}</p>
+    </div>
 
-        <div class="flight-card">
-            <div class="flight-info">
-                <div class="airline-logo">
-                    <i class="fa-solid fa-plane"></i> EL AL
-                </div>
+    {% if flights|length == 0 %}
+    <div style="text-align: center; padding: 50px; background: white; border-radius: 20px;">
+        <i class="fas fa-plane-slash" style="font-size: 3rem; color: #ddd; margin-bottom: 20px;"></i>
+        <h3>No flights found.</h3>
+        <p>Try changing your dates or destination.</p>
+        <a href="/" class="btn-book-sm" style="background: #666;">Go Back</a>
+    </div>
+    {% else %}
 
-                <div class="route-info">
-                    <div class="time">08:00</div>
-                    <div class="city">TLV</div>
-                </div>
+    {% for flight in flights %}
+    <div class="flight-card">
 
-                <div class="route-info">
-                    <div style="color:#ccc;">---------------- <i class="fa-solid fa-plane"></i> ----------------</div>
-                    <div class="duration">5h 20m</div>
-                </div>
-
-                <div class="route-info">
-                    <div class="time">13:20</div>
-                    <div class="city">LHR</div>
-                </div>
-            </div>
-
-            <div class="flight-price">
-                <span class="price-tag">$420</span>
-                <button class="btn btn-primary">Book Now</button>
-            </div>
+        <div class="card-airline">
+            <i class="fas fa-plane" style="font-size: 24px; color: #007bff;"></i>
+            <span style="font-weight: bold; margin-top: 10px; color: #333;">FLY TAU</span>
+            <span style="font-size: 0.8rem; color: #888;">{{ flight.plane_model }}</span>
         </div>
 
-        <div class="flight-card">
-            <div class="flight-info">
-                <div class="airline-logo">
-                    <i class="fa-brands fa-fly"></i> BA
-                </div>
+        <div class="card-details">
 
-                <div class="route-info">
-                    <div class="time">16:30</div>
-                    <div class="city">TLV</div>
-                </div>
-
-                <div class="route-info">
-                    <div style="color:#ccc;">---------------- <i class="fa-solid fa-plane"></i> ----------------</div>
-                    <div class="duration">5h 10m</div>
-                </div>
-
-                <div class="route-info">
-                    <div class="time">21:40</div>
-                    <div class="city">LHR</div>
-                </div>
+            <div class="route-info">
+                <div class="flight-time">{{ flight.dep_time_formatted }}</div>
+                <div style="font-size: 0.8rem; color: #555; margin-top: 4px;">{{ flight.dep_date }}</div>
+                <div class="flight-city" style="margin-top: 5px;">{{ flight.origin_code }}</div>
             </div>
 
-            <div class="flight-price">
-                <span class="price-tag">$380</span>
-                <button class="btn btn-primary">Book Now</button>
+            <div class="flight-duration">
+                <span style="font-size: 0.9rem; color: #444; font-weight: 600;">{{ flight.duration_formatted }}</span>
+                <div class="duration-line">
+                    <i class="fas fa-plane plane-icon-center"></i>
+                </div>
+                <span style="font-size: 0.75rem; color: #2ec4b6;">Direct Flight</span>
+            </div>
+
+            <div class="route-info">
+                <div class="flight-time">
+                    {{ flight.arrival_time }}
+                    {% if flight.is_next_day == 1 %}
+                    <sup style="color: #d90429; font-size: 0.6em;">+1</sup>
+                    {% endif %}
+                </div>
+                <div style="font-size: 0.8rem; color: #555; margin-top: 4px;">{{ flight.arrival_full_date }}</div>
+                <div class="flight-city" style="margin-top: 5px;">{{ flight.dest_code }}</div>
+            </div>
+
+            <div class="card-price">
+                <span class="price-tag">${{ flight.base_price }}</span>
+                <span style="font-size: 0.7rem; color: green; display: block; margin-bottom: 5px;">
+                    {{ flight.available_seats }} seats left
+                </span>
+                <a href="/booking?flight_id={{ flight.flight_id }}&passengers={{ passengers }}"
+                    class="btn-book-sm">Select</a>
             </div>
         </div>
 
-    </main>
+    </div>
+    {% endfor %}
 
-    <footer class="main-footer">
-        <p class="copyright">&copy; 2025 FLY TAU Airlines.</p>
-    </footer>
-
-</body>
-</html>
+    {% endif %}
+</div>
+{% endblock %}

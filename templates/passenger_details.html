@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Passenger Details</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f7f6;
+            padding-top: 50px;
+        }
+
+        .form-card {
+            max-width: 500px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="form-card">
+            <h3 class="text-center mb-4">Passenger Details</h3>
+
+            <div class="alert alert-info">
+                <strong>Selected Seats:</strong> {{ seats | join(', ') }} <br>
+                <strong>Number of Passengers:</strong> {{ passengers }} <br>
+                <strong>Total Price:</strong> ${{ price }}
+            </div>
+
+            <form action="/finalize_booking" method="POST">
+                <input type="hidden" name="flight_id" value="{{ flight_id }}">
+                <input type="hidden" name="seats" value="{{ seats | join(',') }}">
+                <input type="hidden" name="price" value="{{ price }}">
+                <input type="hidden" name="passengers" value="{{ passengers }}">
+
+                <div class="mb-3">
+                    <label>First Name (English) <span class="text-danger">*</span></label>
+                    <input type="text" name="first_name" class="form-control" required placeholder="John">
+                </div>
+
+                <div class="mb-3">
+                    <label>Last Name (English) <span class="text-danger">*</span></label>
+                    <input type="text" name="last_name" class="form-control" required placeholder="Doe">
+                </div>
+
+                <div class="mb-3">
+                    <label>Email Address <span class="text-danger">*</span></label>
+                    <input type="email" name="email" class="form-control" required placeholder="email@example.com">
+                </div>
+
+                <div class="mb-3">
+                    <label>Phone Number <span class="text-danger">*</span></label>
+                    <input type="tel" name="phone" class="form-control" required placeholder="050-1234567">
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100 btn-lg">Confirm Booking</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>

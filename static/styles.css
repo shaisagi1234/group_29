@@ -1,457 +1,304 @@
-/* ================= GLOBAL VARIABLES & RESET ================= */
-:root {
-    /* Color Palette - Sky & Ocean shades */
-    --primary-blue: #0056b3;      /* Deep professional blue */
-    --sky-blue: #007bff;          /* Vibrant sky blue for accents */
-    --light-sky: #e3f2fd;         /* Very pale blue for backgrounds */
-    --accent-cyan: #00cba9;       /* A touch of cyan for vacations */
-    --white: #ffffff;
-    --dark-text: #2c3e50;
-    --light-text: #f8f9fa;
-    --shadow: 0 8px 30px rgba(0,0,0,0.12); /* Soft, modern shadow */
-}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing: border_box;
+    font-family: 'Poppins', sans-serif;
 }
 
 body {
-    font-family: 'Poppins', sans-serif; /* Modern font */
-    background-color: var(--light-sky);
-    color: var(--dark-text);
-    line-height: 1.6;
+    /* צבע רקע כללי נעים - לא לבן בוהק */
+    background-color: #f0f4f8;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
-a { text-decoration: none; color: inherit; transition: 0.3s; }
-ul { list-style: none; }
-.container { width: 90%; max-width: 1200px; margin: 0 auto; }
-
-/* ================= BUTTONS DESIGN ================= */
-.btn {
-    padding: 0.75rem 1.5rem;
-    border-radius: 50px; /* Rounded "pill" buttons */
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-}
-
-/* Primary "Register" Button - Blue Gradient */
-.btn-primary {
-    background: linear-gradient(135deg, var(--sky-blue), var(--primary-blue));
-    color: var(--white);
-    border: none;
-    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
-}
-
-.btn-primary:hover {
-    transform: translateY(-2px); /* Slight lift effect */
-    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
-}
-
-/* Outline "Login" Button */
-.btn-outline {
-    background: transparent;
-    border: 2px solid var(--white);
-    color: var(--white);
-}
-
-.btn-outline:hover {
-    background: var(--white);
-    color: var(--primary-blue);
-}
-
-/* Huge Search Button */
-.btn-search {
-    background: linear-gradient(135deg, var(--accent-cyan), var(--sky-blue));
-    color: var(--white);
-    font-size: 1.2rem;
-    padding: 1rem 2rem;
+/* --- Navbar --- */
+.navbar {
+    position: absolute;
     width: 100%;
-    justify-content: center;
-    border: none;
-}
-
-.btn-search:hover {
-    background: linear-gradient(135deg, var(--sky-blue), var(--accent-cyan));
-    box-shadow: 0 5px 15px rgba(0, 203, 169, 0.4);
-}
-
-/* ================= HEADER & NAVBAR ================= */
-.main-header {
-    background: linear-gradient(to right, var(--primary-blue), var(--sky-blue));
-    padding: 1rem 0;
-    color: var(--white);
-    position: sticky; /* Stays at the top */
     top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-
-.nav-container {
+    padding: 15px 50px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    z-index: 100;
+    transition: 0.3s;
+}
+
+/* עיצוב לתפריט בדפים רגילים (לא דף הבית) */
+.navbar.solid-nav {
+    background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+    position: fixed; /* שיהיה דבוק למעלה */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 .logo {
-    font-size: 1.8rem;
+    font-size: 24px;
     font-weight: 700;
+    color: white;
+}
+
+.nav-links {
     display: flex;
-    align-items: center;
-    gap: 10px;
+    gap: 25px;
 }
 
-.header-icon {
-    transform: rotate(-20deg); /* Make the plane look like it's taking off */
-}
-
-.main-nav ul {
-    display: flex;
-    gap: 2rem;
-}
-
-.main-nav a {
+.nav-links a {
+    text-decoration: none;
+    color: white;
     font-weight: 500;
-    position: relative;
-}
-
-/* Nice underline effect on hover */
-.main-nav a::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: -5px;
-    left: 0;
-    background-color: var(--accent-cyan);
+    font-size: 14px;
+    opacity: 0.95;
     transition: 0.3s;
 }
 
-.main-nav a:hover::after,
-.main-nav a.active::after {
-    width: 100%;
+.nav-links a:hover {
+    opacity: 1;
+    transform: translateY(-2px);
 }
 
-.admin-link { color: var(--accent-cyan) !important; }
-.auth-buttons { display: flex; gap: 1rem; }
-
-
-/* ================= HERO SECTION (The main visual part) ================= */
-.hero-section {
-    /* PUT YOUR IMAGE HERE: Replace 'hero-bg.jpg' with your image file */
-    background-image: url('hero-bg.jpg');
-    background-size: cover;
-    background-position: center;
-    min-height: 85vh; /* Takes up most of the screen height */
-    display: flex;
-    align-items: center;
-    position: relative;
-}
-
-/* Dark blue overlay so text is readable on top of image */
-.hero-overlay {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(to bottom right, rgba(0, 86, 179, 0.6), rgba(0, 203, 169, 0.4));
-}
-
-.hero-content {
-    position: relative; /* To sit on top of overlay */
-    z-index: 2;
-    text-align: center;
-    color: var(--white);
-}
-
-.hero-title {
-    font-size: 3.5rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-}
-
-.vacation-icon { color: var(--accent-cyan); }
-
-.hero-subtitle {
-    font-size: 1.3rem;
-    margin-bottom: 3rem;
-    opacity: 0.9;
-}
-
-/* ================= SEARCH WIDGET CARD ================= */
-.search-widget-card {
-    background: var(--white);
-    padding: 2rem 3rem;
-    border-radius: 20px;
-    box-shadow: var(--shadow);
-    color: var(--dark-text);
-    text-align: left;
-    max-width: 1000px;
-    margin: 0 auto; /* Center the card */
-}
-
-.widget-title {
-    color: var(--primary-blue);
-    margin-bottom: 1.5rem;
-    font-size: 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.flight-search-form {
-    display: grid;
-    /* Create a grid layout for inputs + button */
-    grid-template-columns: repeat(4, 1fr) auto;
-    gap: 1.5rem;
-    align-items: end; /* Align button with inputs */
-}
-
-.input-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.input-group label {
+/* כפתורי התחברות */
+.auth-buttons .btn {
+    padding: 8px 20px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 14px;
     font-weight: 600;
-    font-size: 0.9rem;
-    color: var(--primary-blue);
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    margin-left: 10px;
+    transition: 0.3s;
 }
 
-/* Styling the input fields nicely */
-.input-group input,
-.input-group select {
-    padding: 0.8rem 1rem;
-    border: 2px solid var(--light-sky);
-    border-radius: 10px;
-    font-family: inherit;
-    font-size: 1rem;
-    transition: 0.3s;
+.btn-login { border: 1px solid white; color: white; }
+.btn-login:hover { background: rgba(255,255,255,0.2); }
+
+.btn-register { background: white; color: #007bff; }
+.btn-register:hover { background: #e6e6e6; }
+
+/* רווח לדפים פנימיים כדי שהתוכן לא ייסתיר את התפריט */
+.nav-spacer {
+    height: 80px;
     width: 100%;
 }
 
-.input-group input:focus,
-.input-group select:focus {
-    outline: none;
-    border-color: var(--sky-blue);
-    box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.1);
-}
-
-
-/* ================= FOOTER ================= */
-.main-footer {
-    background: var(--primary-blue);
-    color: var(--light-text);
-    padding: 1.5rem 0;
-    text-align: center;
-    margin-top: auto;
-}
-
-.footer-logo {
-    font-size: 1.2rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-}
-
-.copyright { font-size: 0.9rem; opacity: 0.7; }
-
-/* ================= RESPONSIVE (Mobile fix) ================= */
-@media (max-width: 768px) {
-    .hero-title { font-size: 2.5rem; }
-    .flight-search-form { grid-template-columns: 1fr; /* Stack inputs vertically on mobile */ }
-    .nav-container { flex-direction: column; gap: 1rem; padding: 1rem; }
-    .main-nav ul { flex-direction: column; align-items: center; gap: 1rem; }
-}
-/* ================= AUTH PAGES (Login/Register) ================= */
-.auth-section {
-    min-height: 80vh;
+/* --- Hero Section (רק לדף הבית) --- */
+.hero {
+    height: 60vh;
+    background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(135deg, var(--light-sky), #d6eaff);
-    padding: 2rem;
-}
-
-.auth-card {
-    background: var(--white);
-    padding: 2.5rem;
-    border-radius: 20px;
-    box-shadow: var(--shadow);
-    width: 100%;
-    max-width: 450px;
     text-align: center;
+    color: white;
+    padding-bottom: 80px;
+    position: relative;
+    border-radius: 0 0 50% 50% / 20px; /* עיגול קטן ויפה למטה */
 }
 
-.auth-title {
-    color: var(--primary-blue);
-    margin-bottom: 1.5rem;
-    font-size: 2rem;
+.hero h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    text-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
-.auth-footer {
-    margin-top: 1.5rem;
-    font-size: 0.9rem;
-    color: #666;
-}
-
-.auth-footer a {
-    color: var(--sky-blue);
-    font-weight: 600;
-}
-/* ================= FLIGHT RESULTS ================= */
-.results-section {
-    padding: 2rem 0;
-    min-height: 80vh;
-}
-
-.section-title {
-    margin-bottom: 2rem;
-    color: var(--primary-blue);
-    font-size: 1.8rem;
-}
-
-/* Flight Card Design */
-.flight-card {
-    background: var(--white);
-    border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    margin-bottom: 1.5rem;
-    padding: 1.5rem;
+/* --- Floating Search Card --- */
+.search-wrapper {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    margin-top: -80px;
+    padding: 0 20px;
+    z-index: 20;
+    position: relative;
+}
+
+.search-card {
+    background: white;
+    padding: 30px 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.08); /* צל עדין יותר */
+    width: 100%;
+    max-width: 1100px;
+}
+
+.search-title {
+    color: #0056b3;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    display: flex;
     align-items: center;
+    gap: 10px;
+}
+
+/* טופס */
+.search-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) auto;
+    gap: 20px;
+    align-items: end;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.input-icon-wrapper { position: relative; }
+.input-icon-wrapper i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #007bff;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px 15px 12px 40px;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 1rem;
+    outline: none;
+    transition: 0.3s;
+    background: #f9f9f9;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    background: white;
+    box-shadow: 0 0 0 4px rgba(0,123,255,0.1);
+}
+
+.btn-search {
+    background: linear-gradient(to right, #00c6ff, #0072ff);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    height: 48px;
     transition: transform 0.2s;
-    border-left: 5px solid var(--sky-blue);
+}
+
+.btn-search:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,114,255,0.3);
+}
+
+/* --- Results Page --- */
+.results-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.flight-card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    margin-bottom: 25px;
+    display: flex;
+    overflow: hidden;
+    transition: 0.3s;
+    border: 1px solid #edf2f7; /* מסגרת עדינה */
 }
 
 .flight-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
 }
 
-.flight-info {
-    display: flex;
-    gap: 3rem;
-    align-items: center;
-    flex: 1;
-}
-
-.airline-logo {
-    font-size: 2rem;
-    color: var(--primary-blue);
+.card-airline {
+    width: 150px;
+    background: #f8fbff;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    font-size: 0.8rem;
-    font-weight: bold;
+    border-right: 2px dashed #dbeafe;
+    padding: 20px;
 }
 
-.airline-logo i { font-size: 1.5rem; margin-bottom: 5px; }
+.card-details {
+    flex: 1;
+    padding: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-.route-info {
+.route-info { text-align: center; }
+.flight-time { font-size: 1.4rem; font-weight: 700; color: #333; }
+.flight-city { font-size: 0.9rem; color: #777; }
+
+.flight-duration {
     text-align: center;
+    flex: 1;
+    margin: 0 30px;
+    position: relative;
 }
 
-.time { font-size: 1.5rem; font-weight: 700; color: var(--dark-text); }
-.city { font-size: 0.9rem; color: #777; }
-.duration { color: var(--accent-cyan); font-weight: 600; font-size: 0.9rem; margin-top: 5px; }
+.duration-line {
+    height: 2px;
+    background: #e0e0e0;
+    width: 100%;
+    margin: 10px 0;
+    position: relative;
+}
 
-.flight-price {
-    text-align: right;
-    padding-left: 2rem;
+.plane-icon-center {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #007bff;
+    background: white;
+    padding: 0 10px;
+}
+
+.card-price {
+    text-align: center;
+    min-width: 140px;
+    padding-left: 20px;
     border-left: 1px solid #eee;
 }
 
 .price-tag {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #007bff;
     display: block;
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--primary-blue);
-    margin-bottom: 10px;
-}
-/* ================= BOOKINGS & ADMIN TABLES ================= */
-/* עיצוב תגית סטטוס (ירוק למאושר, אדום למבוטל) */
-.status-badge {
-    padding: 5px 12px;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: 700;
-    text-transform: uppercase;
 }
 
-.status-confirmed {
-    background-color: #d4edda;
-    color: #155724;
-}
-
-.status-cancelled {
-    background-color: #f8d7da;
-    color: #721c24;
-}
-
-/* עיצוב טבלאות (לדף המנהל) */
-.admin-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 1rem;
-    background: var(--white);
-    border-radius: 10px;
-    overflow: hidden; /* כדי שהפינות העגולות יעבדו */
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-}
-
-.admin-table th, .admin-table td {
-    padding: 1rem;
-    text-align: left;
-    border-bottom: 1px solid #eee;
-}
-
-.admin-table th {
-    background-color: var(--primary-blue);
-    color: var(--white);
-}
-
-.admin-table tr:hover {
-    background-color: #f9f9f9;
-}
-
-/* כפתור מחיקה אדום קטן */
-.btn-danger {
-    background-color: #dc3545;
+.btn-book-sm {
+    background: #0056b3;
     color: white;
-    padding: 5px 10px;
+    padding: 8px 20px;
     border-radius: 5px;
-    font-size: 0.8rem;
-    border: none;
-    cursor: pointer;
+    text-decoration: none;
+    font-size: 0.9rem;
+    display: inline-block;
+    margin-top: 5px;
+    transition: 0.2s;
 }
 
-/* קופסאות דוחות (סטטיסטיקה) */
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 2rem;
-}
+.btn-book-sm:hover { background: #004494; }
 
-.stat-card {
-    background: var(--white);
-    padding: 1.5rem;
-    border-radius: 15px;
-    box-shadow: var(--shadow);
+/* --- Footer --- */
+footer {
+    margin-top: auto;
+    background: white;
     text-align: center;
-}
-
-.stat-number {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--sky-blue);
+    padding: 20px;
+    color: #777;
+    font-size: 0.9rem;
+    border-top: 1px solid #eee;
 }

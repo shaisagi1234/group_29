@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fly Tau | Discover Your Next Adventure</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="{{ 'home-body' if request.path == '/' else 'page-body' }}">
+
+    <nav class="navbar {{ 'solid-nav' if request.path != '/' else '' }}">
+        <div class="logo">
+            <a href="/" style="text-decoration: none; color: white;">
+                <i class="fas fa-plane-departure"></i> FLY TAU
+            </a>
+        </div>
+        <div class="nav-links">
+            <a href="/">Book a Flight</a>
+            <a href="/my_bookings">My Bookings</a>
+            <a href="/admin">Admin</a>
+        </div>
+        <div class="auth-buttons">
+            <a href="/login" class="btn btn-login">Login</a>
+            <a href="/register" class="btn btn-register">Register</a>
+        </div>
+    </nav>
+
+    {% if request.path != '/' %}
+        <div class="nav-spacer"></div>
+    {% endif %}
+
+    {% block content %}{% endblock %}
+
+    <footer>
+        &copy; 2026 Fly Tau Airlines. Sky-high standards.
+    </footer>
+
+</body>
+</html>
